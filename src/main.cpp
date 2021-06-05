@@ -1,8 +1,17 @@
 #include <Arduino.h>
+#include <services/WebServer.h>
+#include <services/NetworkClient.h>
+
 void setup() {
-// write your initialization code here
+  Serial.begin(9600);
+
+  pinMode(LED_BUILTIN, OUTPUT);
+
+  NetworkClient::begin("STRV-GUEST", "strvhere");
+  WebServer::setup();
 }
 
 void loop() {
-// write your code here
+  WebServer::handleClient();
+  delay(1000);
 }
