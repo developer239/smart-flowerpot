@@ -1,17 +1,21 @@
 #include <Arduino.h>
-#include <services/WebServer.h>
-#include <services/NetworkClient.h>
+
+#define PUMP_INPUT 14
 
 void setup() {
-  Serial.begin(9600);
-
   pinMode(LED_BUILTIN, OUTPUT);
-
-  NetworkClient::begin("STRV-GUEST", "strvhere");
-  WebServer::setup();
+  pinMode(PUMP_INPUT, OUTPUT);
 }
 
 void loop() {
-  WebServer::handleClient();
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(500);
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(500);
+
+  // toggle pump
+  digitalWrite(PUMP_INPUT, LOW);
+  delay(1000);
+  digitalWrite(PUMP_INPUT, HIGH);
   delay(1000);
 }
